@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToFu_Photo_Exhibition_Management_App.Shared.Dto.Response;
-
-namespace ToFu_Photo_Exhibition_Management_App.Services.CarService
+﻿namespace ToFu_Photo_Exhibition_Management_App.Services.CarService
 {
 	class CarService : ICarService
 	{
-		public async Task<ServiceResponse<IEnumerable<CarResponseDto>>> GetFilterCars(int categoryId, int manufacturerId, int teamId)
+		public List<CarResponseDto> Cars { get; } = new List<CarResponseDto>();
+		public async Task GetFilterCars(int categoryId, int manufacturerId, int teamId)
 		{
-			return await Api.Get<ServiceResponse<IEnumerable<CarResponseDto>>>($"api/car/category/{categoryId}/manufacturer/{manufacturerId}/team/{teamId}");
+			Cars.Clear();
+			var result = await Api.Get<ServiceResponse<IEnumerable<CarResponseDto>>>($"api/car/category/{categoryId}/manufacturer/{manufacturerId}/team/{teamId}");
+			if (result != null && result.Data != null)
+			{
+				Cars.AddRange(result.Data);
+			}
 		}
 	}
 }

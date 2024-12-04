@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToFu_Photo_Exhibition_Management_App.Shared.Dto.Response
+namespace ToFu_Photo_Exhibition_Management_App.Dto.Response
 {
 	public class PhotoResponseDto
 	{

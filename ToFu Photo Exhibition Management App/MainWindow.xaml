@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource Default}"
-        Title="ToFu Photo Exhibition Management Application" Height="1000" Width="1500">
+        Title="ToFu Photo Exhibition Management Application" Height="1000" Width="1500"
+        Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -26,7 +27,7 @@
             <TextBlock Text=" Team: "/>
             <ComboBox Name="teamComboBox" Width="200" SelectionChanged="teamComboBox_SelectionChanged" DisplayMemberPath="Name"/>
             <TextBlock Text=" Car: "/>
-            <ComboBox Name="carComboBox" Width="200" SelectionChanged="carComboBox_SelectionChanged" DisplayMemberPath="Name"/>
+            <ComboBox Name="carComboBox" Width="300" SelectionChanged="carComboBox_SelectionChanged" DisplayMemberPath="Name"/>
         </StackPanel>
         <ListBox Grid.Row="2" Name="listBox" Margin="10" Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
             <ListBox.ItemTemplate>

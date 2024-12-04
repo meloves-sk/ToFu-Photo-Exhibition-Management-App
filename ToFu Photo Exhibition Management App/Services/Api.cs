@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Text;
-using System.Threading.Tasks;
-using ToFu_Photo_Exhibition_Management_App.Shared.Dto.Response;
-
-namespace ToFu_Photo_Exhibition_Management_App
+﻿namespace ToFu_Photo_Exhibition_Management_App
 {
 	public static class Api
 	{

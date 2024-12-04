@@ -1,13 +1,16 @@
-﻿using System.Windows;
-using System.Xml.Serialization;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using ToFu_Photo_Exhibition_Management_App.Services.CarService;
-using ToFu_Photo_Exhibition_Management_App.Services.CategoryService;
-using ToFu_Photo_Exhibition_Management_App.Services.ManufacturerService;
-using ToFu_Photo_Exhibition_Management_App.Services.PhotoService;
-using ToFu_Photo_Exhibition_Management_App.Services.RoundService;
-using ToFu_Photo_Exhibition_Management_App.Services.TeamService;
+﻿global using System.Windows;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using System.Net.Http;
+global using System.Net.Http.Json;
+global using System.Windows.Controls;
+global using ToFu_Photo_Exhibition_Management_App.Services.CarService;
+global using ToFu_Photo_Exhibition_Management_App.Services.CategoryService;
+global using ToFu_Photo_Exhibition_Management_App.Services.ManufacturerService;
+global using ToFu_Photo_Exhibition_Management_App.Services.PhotoService;
+global using ToFu_Photo_Exhibition_Management_App.Services.RoundService;
+global using ToFu_Photo_Exhibition_Management_App.Services.TeamService;
+global using ToFu_Photo_Exhibition_Management_App.Dto.Response;
 namespace ToFu_Photo_Exhibition_Management_App
 {
 	/// <summary>
