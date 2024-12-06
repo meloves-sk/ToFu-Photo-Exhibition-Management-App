@@ -3,6 +3,8 @@
 	public interface ICarService
 	{
 		public List<CarResponseDto> Cars { get; }
-		Task GetFilterCars(int categoryId, int manufacturerId, int teamId);
+		public List<CarResponseDto> CarsWithAll { get; }
+		Task GetCars(int categoryId, int manufacturerId, int teamId);
+		Task GetCarsWithAll(int categoryId, int manufacturerId, int teamId);
 	}
 }

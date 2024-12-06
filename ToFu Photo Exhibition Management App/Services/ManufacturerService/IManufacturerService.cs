@@ -3,6 +3,8 @@
 	public interface IManufacturerService
 	{
 		public List<ManufacturerResponseDto> Manufacturers { get; }
-		Task GetFilterManufacturers(int categoryId);
+		public List<ManufacturerResponseDto> ManufacturersWithAll { get; }
+		Task GetManufacturers(int categoryId);
+		Task GetManufacturersWithAll(int categoryId);
 	}
 }

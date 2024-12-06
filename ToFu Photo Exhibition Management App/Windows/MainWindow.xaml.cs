@@ -1,4 +1,4 @@
-﻿namespace ToFu_Photo_Exhibition_Management_App
+﻿namespace ToFu_Photo_Exhibition_Management_App.Windows
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
@@ -52,9 +52,10 @@
 		}
 		private async Task SetCategories()
 		{
-			await _categoryService.GetCategories();
-			categoryComboBox.ItemsSource = _categoryService.Categories;
-			categoryComboBox.SelectedItem = _categoryService.Categories.FirstOrDefault();
+			await _categoryService.GetCategoriesWithAll();
+			categoryComboBox.ItemsSource = _categoryService.CategoriesWithAll;
+			categoryComboBox.SelectedItem = _categoryService.CategoriesWithAll.FirstOrDefault();
+			categoryComboBox.Items.Refresh();
 		}
 
 		private async Task SetRounds()
@@ -64,12 +65,10 @@
 			{
 				return;
 			}
-			await _roundService.GetFilterRounds(category.Id);
-			List<RoundResponseDto> rounds = new List<RoundResponseDto>();
-			rounds.Add(new RoundResponseDto(0, "ALL"));
-			rounds.AddRange(_roundService.Rounds);
-			roundComboBox.ItemsSource = rounds;
-			roundComboBox.SelectedItem = rounds.FirstOrDefault();
+			await _roundService.GetRoundsWithAll(category.Id);
+			roundComboBox.ItemsSource = _roundService.RoundsWithAll;
+			roundComboBox.SelectedItem = _roundService.RoundsWithAll.FirstOrDefault();
+			roundComboBox.Items.Refresh();
 		}
 		private async Task SetManufacturers()
 		{
@@ -78,12 +77,10 @@
 			{
 				return;
 			}
-			await _manufacturerService.GetFilterManufacturers(category.Id);
-			List<ManufacturerResponseDto> manufacturers = new List<ManufacturerResponseDto>();
-			manufacturers.Add(new ManufacturerResponseDto(0, "ALL"));
-			manufacturers.AddRange(_manufacturerService.Manufacturers);
-			manufacturerComboBox.ItemsSource = manufacturers;
-			manufacturerComboBox.SelectedItem = manufacturers.FirstOrDefault();
+			await _manufacturerService.GetManufacturersWithAll(category.Id);
+			manufacturerComboBox.ItemsSource = _manufacturerService.ManufacturersWithAll;
+			manufacturerComboBox.SelectedItem = _manufacturerService.ManufacturersWithAll.FirstOrDefault();
+			manufacturerComboBox.Items.Refresh();
 		}
 
 		private async Task SetTeams()
@@ -94,12 +91,10 @@
 			{
 				return;
 			}
-			await _teamService.GetFilterTeams(category.Id, manufacturer.Id);
-			List<TeamResponseDto> teams = new List<TeamResponseDto>();
-			teams.Add(new TeamResponseDto(0, "ALL"));
-			teams.AddRange(_teamService.Teams);
-			teamComboBox.ItemsSource = teams;
-			teamComboBox.SelectedItem = teams.FirstOrDefault();
+			await _teamService.GetTeamsWithAll(category.Id, manufacturer.Id);
+			teamComboBox.ItemsSource = _teamService.TeamsWithAll;
+			teamComboBox.SelectedItem = _teamService.TeamsWithAll.FirstOrDefault();
+			teamComboBox.Items.Refresh();
 		}
 
 		private async Task SetCars()
@@ -111,12 +106,10 @@
 			{
 				return;
 			}
-			await _carService.GetFilterCars(category.Id, manufacturer.Id, team.Id);
-			List<CarResponseDto> cars = new List<CarResponseDto>();
-			cars.Add(new CarResponseDto(0, "ALL", 0, 0, string.Empty, string.Empty, string.Empty));
-			cars.AddRange(_carService.Cars);
-			carComboBox.ItemsSource = cars;
-			carComboBox.SelectedItem = cars.FirstOrDefault();
+			await _carService.GetCarsWithAll(category.Id, manufacturer.Id, team.Id);
+			carComboBox.ItemsSource = _carService.CarsWithAll;
+			carComboBox.SelectedItem = _carService.CarsWithAll.FirstOrDefault();
+			carComboBox.Items.Refresh();
 		}
 
 		private async Task SetPhotos()
@@ -130,7 +123,7 @@
 			{
 				return;
 			}
-			await _photoService.GetFilterPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
+			await _photoService.GetPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
 			listBox.ItemsSource = _photoService.Photos.Select(a => new
 			{
 				a.Id,

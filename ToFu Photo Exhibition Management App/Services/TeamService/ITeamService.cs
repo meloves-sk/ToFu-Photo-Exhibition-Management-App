@@ -3,6 +3,8 @@
 	public interface ITeamService
 	{
 		public List<TeamResponseDto> Teams { get; }
-		Task GetFilterTeams(int categoryId, int manufacturerId);
+		public List<TeamResponseDto> TeamsWithAll { get; }
+		Task GetTeams(int categoryId, int manufacturerId);
+		Task GetTeamsWithAll(int categoryId, int manufacturerId);
 	}
 }

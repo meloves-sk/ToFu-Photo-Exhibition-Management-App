@@ -3,6 +3,8 @@
 	public interface IRoundService
 	{
 		public List<RoundResponseDto> Rounds { get; }
-		Task GetFilterRounds(int categoryId);
+		public List<RoundResponseDto> RoundsWithAll { get; }
+		Task GetRounds(int categoryId);
+		Task GetRoundsWithAll(int categoryId);
 	}
 }

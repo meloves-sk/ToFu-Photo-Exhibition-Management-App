@@ -4,6 +4,7 @@ global using Microsoft.Extensions.Hosting;
 global using System.Net.Http;
 global using System.Net.Http.Json;
 global using System.Windows.Controls;
+global using ToFu_Photo_Exhibition_Management_App.Windows;
 global using ToFu_Photo_Exhibition_Management_App.Services.CarService;
 global using ToFu_Photo_Exhibition_Management_App.Services.CategoryService;
 global using ToFu_Photo_Exhibition_Management_App.Services.ManufacturerService;
@@ -24,6 +25,7 @@ namespace ToFu_Photo_Exhibition_Management_App
 			AppHost = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
 			{
 				services.AddSingleton<MainWindow>();
+				services.AddSingleton<AddEditPhotoWindow>();
 				services.AddTransient<ICategoryService, CategoryService>();
 				services.AddTransient<IRoundService, RoundService>();
 				services.AddTransient<IManufacturerService, ManufacturerService>();

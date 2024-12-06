@@ -3,6 +3,7 @@
 	class CategoryService : ICategoryService
 	{
 		public List<CategoryResponseDto> Categories { get; } = new List<CategoryResponseDto>();
+		public List<CategoryResponseDto> CategoriesWithAll { get; } = new List<CategoryResponseDto>();
 		public async Task GetCategories()
 		{
 			Categories.Clear();
@@ -12,5 +13,17 @@
 				Categories.AddRange(result.Data);
 			}
 		}
+
+		public async Task GetCategoriesWithAll()
+		{
+			CategoriesWithAll.Clear();
+			var result = await Api.Get<ServiceResponse<IEnumerable<CategoryResponseDto>>>("api/category");
+			if (result != null && result.Data != null)
+			{
+				CategoriesWithAll.Add(new CategoryResponseDto(0, "ALL"));
+				CategoriesWithAll.AddRange(result.Data);
+			}
+		}
 	}
 }
+
