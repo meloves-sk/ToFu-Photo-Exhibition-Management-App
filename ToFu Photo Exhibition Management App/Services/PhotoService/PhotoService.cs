@@ -1,16 +1,42 @@
-﻿namespace ToFu_Photo_Exhibition_Management_App.Services.PhotoService
+﻿
+namespace ToFu_Photo_Exhibition_Management_App.Services.PhotoService
 {
 	class PhotoService : IPhotoService
 	{
 		public List<PhotoResponseDto> Photos { get; } = new List<PhotoResponseDto>();
+
 		public async Task GetPhotos(int categoryId, int roundId, int manufacturerId, int teamId, int carId)
 		{
 			Photos.Clear();
 			var result = await Api.Get<ServiceResponse<IEnumerable<PhotoResponseDto>>>($"api/photo/category/{categoryId}/round/{roundId}/manufacturer/{manufacturerId}/team/{teamId}/car/{carId}");
 			if (result != null && result.Data != null)
 			{
-				Photos.AddRange(result.Data);
+				Photos.AddRange(result.Data.Select(a =>
+				new PhotoResponseDto(
+					a.Id,
+					$"https://www.meloves.net/tofu-photo-exhibition/{a.FilePath}",
+					a.Description,
+					a.RoundId,
+					a.CarId,
+					a.Round,
+					a.Category,
+					a.Car,
+					a.CarNo,
+					a.Team,
+					a.Manufacturer)));
 			}
+		}
+		public async Task<ServiceResponse<bool>> AddPhoto(PhotoRequestDto request)
+		{
+			return await Api.Post("api/photo", request);
+		}
+		public async Task<ServiceResponse<bool>> UpdatePhoto(PhotoRequestDto request)
+		{
+			return await Api.Put("api/photo", request);
+		}
+		public async Task<ServiceResponse<bool>> DeletePhoto(int photoId)
+		{
+			return await Api.Delete($"api/photo/{photoId}");
 		}
 	}
 }

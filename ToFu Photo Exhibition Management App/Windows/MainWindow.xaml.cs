@@ -11,7 +11,15 @@
 		private readonly ITeamService _teamService;
 		private readonly ICarService _carService;
 		private readonly IPhotoService _photoService;
-		public MainWindow(ICategoryService categoryService, IRoundService roundService, IManufacturerService manufacturerService, ITeamService teamService, ICarService carService, IPhotoService photoService)
+		private readonly IAbstractFactory<AddEditPhotoWindow, PhotoResponseDto> _addEditPhotoFactory;
+		public MainWindow(
+			ICategoryService categoryService,
+			IRoundService roundService,
+			IManufacturerService manufacturerService,
+			ITeamService teamService,
+			ICarService carService,
+			IPhotoService photoService,
+			IAbstractFactory<AddEditPhotoWindow, PhotoResponseDto> addEditPhotoFactory)
 		{
 			InitializeComponent();
 			_categoryService = categoryService;
@@ -20,6 +28,7 @@
 			_teamService = teamService;
 			_carService = carService;
 			_photoService = photoService;
+			_addEditPhotoFactory = addEditPhotoFactory;
 		}
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -50,6 +59,26 @@
 		{
 			await SetPhotos();
 		}
+
+		private async void addPhotoBtn_Click(object sender, RoutedEventArgs e)
+		{
+			_addEditPhotoFactory.Argument = null;
+			_addEditPhotoFactory.Create().ShowDialog();
+			await SetPhotos();
+		}
+
+		private async void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			var photo = listBox.SelectedItem as PhotoResponseDto;
+			if (photo == null)
+			{
+				return;
+			}
+			_addEditPhotoFactory.Argument = photo;
+			_addEditPhotoFactory.Create().ShowDialog();
+			await SetPhotos();
+		}
+
 		private async Task SetCategories()
 		{
 			await _categoryService.GetCategoriesWithAll();
@@ -124,13 +153,8 @@
 				return;
 			}
 			await _photoService.GetPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
-			listBox.ItemsSource = _photoService.Photos.Select(a => new
-			{
-				a.Id,
-				a.CarNo,
-				a.Car,
-				FilePath = $"https://www.meloves.net/tofu-photo-exhibition/{a.FilePath}"
-			});
+			listBox.ItemsSource = _photoService.Photos;
+			listBox.Items.Refresh();
 		}
 	}
 }

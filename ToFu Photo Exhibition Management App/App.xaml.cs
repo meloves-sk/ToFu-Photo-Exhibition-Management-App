@@ -12,6 +12,12 @@ global using ToFu_Photo_Exhibition_Management_App.Services.PhotoService;
 global using ToFu_Photo_Exhibition_Management_App.Services.RoundService;
 global using ToFu_Photo_Exhibition_Management_App.Services.TeamService;
 global using ToFu_Photo_Exhibition_Management_App.Dto.Response;
+global using ToFu_Photo_Exhibition_Management_App.StartupHelpers;
+global using ToFu_Photo_Exhibition_Management_App.Shared.Dto.Request;
+global using Microsoft.Win32;
+global using System.IO;
+global using System.Web;
+
 namespace ToFu_Photo_Exhibition_Management_App
 {
 	/// <summary>
@@ -25,7 +31,7 @@ namespace ToFu_Photo_Exhibition_Management_App
 			AppHost = Host.CreateDefaultBuilder().ConfigureServices((hostContext, services) =>
 			{
 				services.AddSingleton<MainWindow>();
-				services.AddSingleton<AddEditPhotoWindow>();
+				services.AddWindowFactory<AddEditPhotoWindow, PhotoResponseDto>();
 				services.AddTransient<ICategoryService, CategoryService>();
 				services.AddTransient<IRoundService, RoundService>();
 				services.AddTransient<IManufacturerService, ManufacturerService>();

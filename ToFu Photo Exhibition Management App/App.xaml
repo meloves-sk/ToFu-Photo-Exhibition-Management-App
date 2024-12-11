@@ -11,5 +11,9 @@
         <Style TargetType="Button">
             <Setter Property="Background" Value="White"/>
         </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        </Style>
     </Application.Resources>
 </Application>

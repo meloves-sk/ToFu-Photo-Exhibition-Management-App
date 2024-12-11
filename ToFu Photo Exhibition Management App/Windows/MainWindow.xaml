@@ -29,10 +29,10 @@
             <TextBlock Text=" Car: "/>
             <ComboBox Name="carComboBox" Width="300" SelectionChanged="carComboBox_SelectionChanged" DisplayMemberPath="Name"/>
         </StackPanel>
-        <ListBox Grid.Row="2" Name="listBox" Margin="10" Background="Transparent">
+        <ListBox Grid.Row="2" Name="listBox" Margin="10" Background="Transparent" SelectionChanged="listBox_SelectionChanged"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Vertical" MaxWidth="400" MaxHeight="400" Background="White">
+                    <StackPanel Orientation="Vertical" MaxWidth="300" MaxHeight="300" Background="White">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="No."/>
                             <TextBlock Text="{Binding CarNo}" />
@@ -45,9 +45,17 @@
             </ListBox.ItemTemplate>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal"/>
+                    <WrapPanel/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <Button Grid.Row="3" Name="addPhotoBtn" Width="150" Click="addPhotoBtn_Click" HorizontalAlignment="Left" Margin="10">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resource/camera.png" Width="20"/>
+                    <TextBlock Text=" Add Photo"/>
+                </StackPanel>
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>
