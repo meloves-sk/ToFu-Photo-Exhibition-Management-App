@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource Default}"
-        Title="Round Management" Height="600" Width="1000"
+        Title="Team Information Management" Height="600" Width="1000"
         Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
@@ -24,12 +24,12 @@
             <ComboBox Name="manufacturerComboBox" Width="200" SelectionChanged="manufacturerComboBox_SelectionChanged" DisplayMemberPath="Name"/>
             <TextBlock Text=" Team: "/>
             <ComboBox Name="teamComboBox" Width="200" DisplayMemberPath="Name"/>
-            <TextBlock Width="30"/>
+            <TextBlock Width="20"/>
             <Button Name="saveButton" Content="Save" Width="100" Click="saveButton_Click"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="10">
             <TextBlock Name="statusTextBlock" />
-            <TextBlock Width="30"/>
+            <TextBlock Width="20"/>
             <TextBlock>
                 <Hyperlink Name="resetLink" Click="resetLink_Click">Reset</Hyperlink>
             </TextBlock>

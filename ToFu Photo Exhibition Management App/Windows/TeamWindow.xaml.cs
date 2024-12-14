@@ -15,6 +15,7 @@
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			await SetTeams();
+			SetStatus();
 		}
 
 		private async void saveButton_Click(object sender, RoutedEventArgs e)
