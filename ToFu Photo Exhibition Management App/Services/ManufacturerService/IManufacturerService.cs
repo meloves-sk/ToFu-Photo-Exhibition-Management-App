@@ -6,5 +6,8 @@
 		public List<ManufacturerResponseDto> ManufacturersWithAll { get; }
 		Task GetManufacturers(int categoryId);
 		Task GetManufacturersWithAll(int categoryId);
+		Task<ServiceResponse<bool>> AddManufacturer(ManufacturerRequestDto request);
+		Task<ServiceResponse<bool>> UpdateManufacturer(ManufacturerRequestDto request);
+		Task<ServiceResponse<bool>> DeleteManufacturer(int manufacturerId);
 	}
 }

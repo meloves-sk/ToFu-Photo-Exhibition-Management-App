@@ -6,5 +6,8 @@
 		public List<RoundResponseDto> RoundsWithAll { get; }
 		Task GetRounds(int categoryId);
 		Task GetRoundsWithAll(int categoryId);
+		Task<ServiceResponse<bool>> AddRound(RoundRequestDto request);
+		Task<ServiceResponse<bool>> UpdateRound(RoundRequestDto request);
+		Task<ServiceResponse<bool>> DeleteRound(int roundId);
 	}
 }

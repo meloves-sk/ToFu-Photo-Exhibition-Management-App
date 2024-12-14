@@ -8,7 +8,7 @@
 		{
 			Rounds.Clear();
 			var result = await Api.Get<ServiceResponse<IEnumerable<RoundResponseDto>>>($"api/round/category/{categoryId}");
-			if(result != null && result.Data != null)
+			if (result != null && result.Data != null)
 			{
 				Rounds.AddRange(result.Data);
 			}
@@ -22,6 +22,18 @@
 				RoundsWithAll.Add(new RoundResponseDto(0, "ALL"));
 				RoundsWithAll.AddRange(result.Data);
 			}
+		}
+		public async Task<ServiceResponse<bool>> AddRound(RoundRequestDto request)
+		{
+			return await Api.Post("api/round", request);
+		}
+		public async Task<ServiceResponse<bool>> UpdateRound(RoundRequestDto request)
+		{
+			return await Api.Put("api/round", request);
+		}
+		public async Task<ServiceResponse<bool>> DeleteRound(int roundId)
+		{
+			return await Api.Delete($"api/round/{roundId}");
 		}
 	}
 }

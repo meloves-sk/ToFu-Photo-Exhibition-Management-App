@@ -6,5 +6,8 @@
 		public List<TeamResponseDto> TeamsWithAll { get; }
 		Task GetTeams(int categoryId, int manufacturerId);
 		Task GetTeamsWithAll(int categoryId, int manufacturerId);
+		Task<ServiceResponse<bool>> AddTeam(TeamRequestDto request);
+		Task<ServiceResponse<bool>> UpdateTeam(TeamRequestDto request);
+		Task<ServiceResponse<bool>> DeleteTeam(int teamId);
 	}
 }

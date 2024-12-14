@@ -49,7 +49,7 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        <Button Grid.Row="3" Name="addPhotoBtn" Width="150" Click="addPhotoBtn_Click" HorizontalAlignment="Left" Margin="10">
+        <Button Grid.Row="3" Name="addPhotoButton" Width="150" Click="addPhotoButton_Click" HorizontalAlignment="Left" Margin="10">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resource/camera.png" Width="20"/>
@@ -57,5 +57,12 @@
                 </StackPanel>
             </Button.Content>
         </Button>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Right">
+            <Button Name="roundButton" Content="Round" Width="150" Click="roundButton_Click" Margin="10"/>
+            <Button Name="manufacturerButton" Content="Manufacturer" Width="150" Click="manufacturerButton_Click" Margin="10"/>
+            <Button Name="teamButton" Content="Team" Width="150" Click="teamButton_Click" Margin="10"/>
+            <Button Name="teamInformationButton" Content="Team Information" Width="150" Click="teamInformationButton_Click" Margin="10"/>
+            <Button Name="carButton" Content="Car" Width="150" Click="carButton_Click" Margin="10"/>
+        </StackPanel>
     </Grid>
 </Window>

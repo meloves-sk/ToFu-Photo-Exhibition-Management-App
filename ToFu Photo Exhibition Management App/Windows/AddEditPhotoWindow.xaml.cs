@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace ToFu_Photo_Exhibition_Management_App.Windows
+﻿namespace ToFu_Photo_Exhibition_Management_App.Windows
 {
 	/// <summary>
 	/// AddEditPhotoWindow.xaml の相互作用ロジック
@@ -40,8 +38,9 @@ namespace ToFu_Photo_Exhibition_Management_App.Windows
 			if (_addEditPhotoFactory.Argument == null) _isInitialize = false;
 			if (_isInitialize)
 			{
-				uploadBtn.Visibility = Visibility.Collapsed;
-				deleteBtn.Visibility = Visibility.Visible;
+				Title = "Edit Photo";
+				uploadButton.Visibility = Visibility.Collapsed;
+				deleteButton.Visibility = Visibility.Visible;
 				descriptionTextBox.Text = _addEditPhotoFactory.Argument!.Description;
 				using (var client = new HttpClient())
 				{
@@ -51,7 +50,7 @@ namespace ToFu_Photo_Exhibition_Management_App.Windows
 			}
 			await SetCategories();
 		}
-		private void uploadBtn_Click(object sender, RoutedEventArgs e)
+		private void uploadButton_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -73,7 +72,7 @@ namespace ToFu_Photo_Exhibition_Management_App.Windows
 				MessageBox.Show(ex.Message);
 			}
 		}
-		private async void deleteBtn_Click(object sender, RoutedEventArgs e)
+		private async void deleteButton_Click(object sender, RoutedEventArgs e)
 		{
 			var result = await _photoService.DeletePhoto(_addEditPhotoFactory.Argument.Id);
 			MessageBox.Show(result.Message);
@@ -94,7 +93,7 @@ namespace ToFu_Photo_Exhibition_Management_App.Windows
 			await SetCars();
 		}
 
-		private async void saveBtn_Click(object sender, RoutedEventArgs e)
+		private async void saveButton_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -102,15 +101,15 @@ namespace ToFu_Photo_Exhibition_Management_App.Windows
 				var car = carComboBox.SelectedItem as CarResponseDto;
 				if (round == null)
 				{
-					throw new NullReferenceException("ラウンドを選択してください");
+					throw new Exception("ラウンドを選択してください");
 				}
 				if (carComboBox.SelectedItem == null)
 				{
-					throw new NullReferenceException("車両を選択してください");
+					throw new Exception("車両を選択してください");
 				}
 				if (_imageData == null)
 				{
-					throw new NullReferenceException("写真を選択してください");
+					throw new Exception("写真を選択してください");
 				}
 				var request = new PhotoRequestDto(_addEditPhotoFactory.Argument?.Id ?? 0, descriptionTextBox.Text, round.Id, car.Id, _imageData);
 				var result = _addEditPhotoFactory.Argument == null ?

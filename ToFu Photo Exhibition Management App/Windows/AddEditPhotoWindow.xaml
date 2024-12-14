@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource Default}"
-        Title="AddEditPhotoWindow" Height="600" Width="900"
+        Title="Add Photo" Height="600" Width="900"
         Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -21,8 +21,8 @@
         </Grid.RowDefinitions>
         <Image Source="../Resource/tofu_photo_exhibition_logo.png" Width="200" HorizontalAlignment="Left"/>
         <Image Grid.Row="1" Source="{Binding Image}" Margin="10"/>
-        <Button Grid.Row="2" Name="uploadBtn" Content="Upload" Click="uploadBtn_Click" Margin="10" Width="100"/>
-        <Button Grid.Row="2" Name="deleteBtn" Content="Delete" Foreground="Red" Click="deleteBtn_Click" Margin="10" Width="100" Visibility="Collapsed" HorizontalAlignment="Left"/>
+        <Button Grid.Row="2" Name="uploadButton" Content="Upload" Click="uploadButton_Click" Margin="10" Width="100"/>
+        <Button Grid.Row="2" Name="deleteButton" Content="Delete" Foreground="Red" Click="deleteButton_Click" Margin="10" Width="100" Visibility="Collapsed" HorizontalAlignment="Left"/>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1">
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Category:" Width="120"/>
@@ -49,6 +49,6 @@
                 <TextBox Name="descriptionTextBox" Width="300" Height="100" TextWrapping="Wrap" AcceptsReturn="True"/>
             </StackPanel>
         </StackPanel>
-        <Button Name="saveBtn" Content="Save" Grid.Row="2" Grid.Column="1" Width="100" Margin="10" Click="saveBtn_Click" HorizontalAlignment="Right"/>
+        <Button Name="saveButton" Content="Save" Grid.Row="2" Grid.Column="1" Width="100" Margin="10" Click="saveButton_Click" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

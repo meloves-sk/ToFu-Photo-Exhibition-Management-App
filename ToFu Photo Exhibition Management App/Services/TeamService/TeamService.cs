@@ -23,5 +23,17 @@
 				TeamsWithAll.AddRange(result.Data);
 			}
 		}
+		public async Task<ServiceResponse<bool>> AddTeam(TeamRequestDto request)
+		{
+			return await Api.Post($"api/team", request);
+		}
+		public async Task<ServiceResponse<bool>> UpdateTeam(TeamRequestDto request)
+		{
+			return await Api.Put($"api/team", request);
+		}
+		public async Task<ServiceResponse<bool>> DeleteTeam(int teamId)
+		{
+			return await Api.Delete($"api/team/{teamId}");
+		}
 	}
 }

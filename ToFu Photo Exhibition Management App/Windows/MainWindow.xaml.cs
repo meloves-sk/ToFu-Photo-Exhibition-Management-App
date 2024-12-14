@@ -12,6 +12,9 @@
 		private readonly ICarService _carService;
 		private readonly IPhotoService _photoService;
 		private readonly IAbstractFactory<AddEditPhotoWindow, PhotoResponseDto> _addEditPhotoFactory;
+		private readonly IAbstractFactory<RoundWindow, RoundResponseDto> _roundFactory;
+		private readonly IAbstractFactory<ManufacturerWindow, ManufacturerResponseDto> _manufacturerFactory;
+		private readonly IAbstractFactory<TeamWindow, TeamResponseDto> _teamFactory;
 		public MainWindow(
 			ICategoryService categoryService,
 			IRoundService roundService,
@@ -19,7 +22,10 @@
 			ITeamService teamService,
 			ICarService carService,
 			IPhotoService photoService,
-			IAbstractFactory<AddEditPhotoWindow, PhotoResponseDto> addEditPhotoFactory)
+			IAbstractFactory<AddEditPhotoWindow, PhotoResponseDto> addEditPhotoFactory,
+			IAbstractFactory<RoundWindow, RoundResponseDto> roundFactory,
+			IAbstractFactory<ManufacturerWindow, ManufacturerResponseDto> manufacturerFactory,
+			IAbstractFactory<TeamWindow, TeamResponseDto> teamFactory)
 		{
 			InitializeComponent();
 			_categoryService = categoryService;
@@ -29,6 +35,9 @@
 			_carService = carService;
 			_photoService = photoService;
 			_addEditPhotoFactory = addEditPhotoFactory;
+			_roundFactory = roundFactory;
+			_manufacturerFactory = manufacturerFactory;
+			_teamFactory = teamFactory;
 		}
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -60,7 +69,7 @@
 			await SetPhotos();
 		}
 
-		private async void addPhotoBtn_Click(object sender, RoutedEventArgs e)
+		private async void addPhotoButton_Click(object sender, RoutedEventArgs e)
 		{
 			_addEditPhotoFactory.Argument = null;
 			_addEditPhotoFactory.Create().ShowDialog();
@@ -155,6 +164,34 @@
 			await _photoService.GetPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
 			listBox.ItemsSource = _photoService.Photos;
 			listBox.Items.Refresh();
+		}
+
+		private async void roundButton_Click(object sender, RoutedEventArgs e)
+		{
+			_roundFactory.Create().ShowDialog();
+			await SetRounds();
+		}
+
+		private async void manufacturerButton_Click(object sender, RoutedEventArgs e)
+		{
+			_manufacturerFactory.Create().ShowDialog();
+			await SetManufacturers();
+		}
+
+		private async void teamButton_Click(object sender, RoutedEventArgs e)
+		{
+			_teamFactory.Create().ShowDialog();
+			await SetTeams();
+		}
+
+		private void teamInformationButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void carButton_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

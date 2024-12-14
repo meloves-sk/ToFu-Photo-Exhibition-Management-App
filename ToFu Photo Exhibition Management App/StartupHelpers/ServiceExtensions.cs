@@ -6,7 +6,7 @@
 		{
 			services.AddTransient<TWindow>();
 			services.AddSingleton<Func<TWindow>>(a => () => a.GetService<TWindow>());
-			services.AddSingleton<IAbstractFactory<TWindow, TArgument>, AbstractFactory<TWindow,TArgument>>();
+			services.AddSingleton<IAbstractFactory<TWindow, TArgument>, AbstractFactory<TWindow, TArgument>>();
 		}
 	}
 }

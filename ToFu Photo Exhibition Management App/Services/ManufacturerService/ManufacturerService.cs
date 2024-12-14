@@ -23,5 +23,17 @@
 				ManufacturersWithAll.AddRange(result.Data);
 			}
 		}
+		public async Task<ServiceResponse<bool>> AddManufacturer(ManufacturerRequestDto request)
+		{
+			return await Api.Post($"api/manufacturer", request);
+		}
+		public async Task<ServiceResponse<bool>> UpdateManufacturer(ManufacturerRequestDto request)
+		{
+			return await Api.Put($"api/manufacturer", request);
+		}
+		public async Task<ServiceResponse<bool>> DeleteManufacturer(int manufacturerId)
+		{
+			return await Api.Delete($"api/manufacturer/{manufacturerId}");
+		}
 	}
 }

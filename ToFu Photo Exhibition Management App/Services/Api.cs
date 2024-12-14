@@ -33,7 +33,8 @@
 		{
 			using (HttpClient client = new HttpClient())
 			{
-				return await client.DeleteFromJsonAsync<ServiceResponse<bool>>($"{url}/{arg}");
+				var result = await client.DeleteAsync($"{url}/{arg}");
+				return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
 			}
 		}
 	}
