@@ -11,6 +11,7 @@ global using ToFu_Photo_Exhibition_Management_App.Services.ManufacturerService;
 global using ToFu_Photo_Exhibition_Management_App.Services.PhotoService;
 global using ToFu_Photo_Exhibition_Management_App.Services.RoundService;
 global using ToFu_Photo_Exhibition_Management_App.Services.TeamService;
+global using ToFu_Photo_Exhibition_Management_App.Services.TeamInformationService;
 global using ToFu_Photo_Exhibition_Management_App.Dto.Response;
 global using ToFu_Photo_Exhibition_Management_App.StartupHelpers;
 global using ToFu_Photo_Exhibition_Management_App.Shared.Dto.Request;
@@ -18,8 +19,6 @@ global using Microsoft.Win32;
 global using System.IO;
 global using System.Windows.Documents;
 global using System.Web;
-
-
 namespace ToFu_Photo_Exhibition_Management_App
 {
 	/// <summary>
@@ -37,10 +36,12 @@ namespace ToFu_Photo_Exhibition_Management_App
 				services.AddWindowFactory<RoundWindow, RoundResponseDto>();
 				services.AddWindowFactory<ManufacturerWindow, ManufacturerResponseDto>();
 				services.AddWindowFactory<TeamWindow, TeamResponseDto>();
+				services.AddWindowFactory<TeamInformationWindow, TeamInformationResponseDto>();
 				services.AddTransient<ICategoryService, CategoryService>();
 				services.AddTransient<IRoundService, RoundService>();
 				services.AddTransient<IManufacturerService, ManufacturerService>();
 				services.AddTransient<ITeamService, TeamService>();
+				services.AddTransient<ITeamInformationService, TeamInformationService>();
 				services.AddTransient<ICarService, CarService>();
 				services.AddTransient<IPhotoService, PhotoService>();
 			}).Build();

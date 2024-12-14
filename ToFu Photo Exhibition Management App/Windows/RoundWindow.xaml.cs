@@ -86,7 +86,6 @@
 			await SetRounds();
 			MessageBox.Show(result.Message);
 		}
-
 		private void SetStatus()
 		{
 			if (_roundResponse == null)
