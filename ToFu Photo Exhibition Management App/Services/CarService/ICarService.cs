@@ -6,5 +6,8 @@
 		public List<CarResponseDto> CarsWithAll { get; }
 		Task GetCars(int categoryId, int manufacturerId, int teamId);
 		Task GetCarsWithAll(int categoryId, int manufacturerId, int teamId);
+		Task<ServiceResponse<bool>> AddCar(CarRequestDto request);
+		Task<ServiceResponse<bool>> UpdateCar(CarRequestDto request);
+		Task<ServiceResponse<bool>> DeleteCar(int carId);
 	}
 }

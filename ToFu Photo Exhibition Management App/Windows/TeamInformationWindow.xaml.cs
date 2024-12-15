@@ -86,7 +86,7 @@
 				return;
 			}
 			_teamInformationResponse = teamInformation;
-			await SetCategories();
+			await Task.WhenAll(SetCategories(), SetManufacturers(), SetTeams());
 			SetStatus();
 		}
 		private async void deleteLink_Click(object sender, RoutedEventArgs e)

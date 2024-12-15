@@ -37,6 +37,7 @@ namespace ToFu_Photo_Exhibition_Management_App
 				services.AddWindowFactory<ManufacturerWindow, ManufacturerResponseDto>();
 				services.AddWindowFactory<TeamWindow, TeamResponseDto>();
 				services.AddWindowFactory<TeamInformationWindow, TeamInformationResponseDto>();
+				services.AddWindowFactory<CarWindow, CarResponseDto>();
 				services.AddTransient<ICategoryService, CategoryService>();
 				services.AddTransient<IRoundService, RoundService>();
 				services.AddTransient<IManufacturerService, ManufacturerService>();

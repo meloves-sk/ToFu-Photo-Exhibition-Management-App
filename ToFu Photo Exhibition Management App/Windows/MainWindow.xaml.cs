@@ -16,6 +16,7 @@
 		private readonly IAbstractFactory<ManufacturerWindow, ManufacturerResponseDto> _manufacturerFactory;
 		private readonly IAbstractFactory<TeamWindow, TeamResponseDto> _teamFactory;
 		private readonly IAbstractFactory<TeamInformationWindow, TeamInformationResponseDto> _teamInformationFactory;
+		private readonly IAbstractFactory<CarWindow, CarResponseDto> _carFactory;
 		public MainWindow(
 			ICategoryService categoryService,
 			IRoundService roundService,
@@ -27,7 +28,8 @@
 			IAbstractFactory<RoundWindow, RoundResponseDto> roundFactory,
 			IAbstractFactory<ManufacturerWindow, ManufacturerResponseDto> manufacturerFactory,
 			IAbstractFactory<TeamWindow, TeamResponseDto> teamFactory,
-			IAbstractFactory<TeamInformationWindow, TeamInformationResponseDto> teamInformationFactory)
+			IAbstractFactory<TeamInformationWindow, TeamInformationResponseDto> teamInformationFactory,
+			IAbstractFactory<CarWindow, CarResponseDto> carFactory)
 		{
 			InitializeComponent();
 			_categoryService = categoryService;
@@ -41,6 +43,7 @@
 			_manufacturerFactory = manufacturerFactory;
 			_teamFactory = teamFactory;
 			_teamInformationFactory = teamInformationFactory;
+			_carFactory = carFactory;
 		}
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
@@ -193,9 +196,10 @@
 			await SetManufacturers();
 		}
 
-		private void carButton_Click(object sender, RoutedEventArgs e)
+		private async void carButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			_carFactory.Create().ShowDialog();
+			await SetCars();
 		}
 	}
 }

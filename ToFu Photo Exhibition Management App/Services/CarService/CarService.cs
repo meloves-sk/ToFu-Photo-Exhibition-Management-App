@@ -23,5 +23,17 @@
 				CarsWithAll.AddRange(result.Data);
 			}
 		}
+		public async Task<ServiceResponse<bool>> AddCar(CarRequestDto request)
+		{
+			return await Api.Post("api/car", request);
+		}
+		public async Task<ServiceResponse<bool>> UpdateCar(CarRequestDto request)
+		{
+			return await Api.Post("api/car", request);
+		}
+		public async Task<ServiceResponse<bool>> DeleteCar(int carId)
+		{
+			return await Api.Delete($"api/car/{carId}");
+		}
 	}
 }
