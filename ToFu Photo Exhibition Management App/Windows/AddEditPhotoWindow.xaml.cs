@@ -35,7 +35,11 @@
 		}
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (_addEditPhotoFactory.Argument == null) _isInitialize = false;
+			await SetCategories();
+			if (_addEditPhotoFactory.Argument == null)
+			{
+				_isInitialize = false;
+			}
 			if (_isInitialize)
 			{
 				Title = "Edit Photo";
@@ -48,7 +52,6 @@
 				}
 				SetImage();
 			}
-			await SetCategories();
 		}
 		private void uploadButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -126,6 +129,7 @@
 
 		private async Task SetCategories()
 		{
+			StartProgress();
 			await _categoryService.GetCategories();
 			categoryComboBox.ItemsSource = _categoryService.Categories;
 			if (_isInitialize)
@@ -138,6 +142,7 @@
 				categoryComboBox.SelectedItem = _categoryService.Categories.FirstOrDefault();
 			}
 			categoryComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetRounds()
@@ -148,6 +153,7 @@
 				roundComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _roundService.GetRounds(category.Id);
 			roundComboBox.ItemsSource = _roundService.Rounds;
 			if (_isInitialize)
@@ -160,6 +166,7 @@
 				roundComboBox.SelectedItem = _roundService.Rounds.FirstOrDefault();
 			}
 			roundComboBox.Items.Refresh();
+			EndProgress();
 		}
 		private async Task SetManufacturers()
 		{
@@ -169,6 +176,7 @@
 				manufacturerComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _manufacturerService.GetManufacturers(category.Id);
 			manufacturerComboBox.ItemsSource = _manufacturerService.Manufacturers;
 			if (_isInitialize)
@@ -181,6 +189,7 @@
 				manufacturerComboBox.SelectedItem = _manufacturerService.Manufacturers.FirstOrDefault();
 			}
 			manufacturerComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetTeams()
@@ -192,6 +201,7 @@
 				teamComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _teamService.GetTeams(category.Id, manufacturer.Id);
 			teamComboBox.ItemsSource = _teamService.Teams;
 			if (_isInitialize)
@@ -204,6 +214,7 @@
 				teamComboBox.SelectedItem = _teamService.Teams.FirstOrDefault();
 			}
 			teamComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetCars()
@@ -216,6 +227,7 @@
 				carComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _carService.GetCars(category.Id, manufacturer.Id, team.Id);
 			carComboBox.ItemsSource = _carService.Cars;
 			if (_isInitialize)
@@ -228,6 +240,7 @@
 				carComboBox.SelectedItem = _carService.Cars.FirstOrDefault();
 			}
 			carComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private void CheckInitialize()
@@ -242,6 +255,20 @@
 			{
 				Image = _imageData
 			};
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_categoryService.IsSearch || _roundService.IsSearch || _manufacturerService.IsSearch || _teamService.IsSearch || _carService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

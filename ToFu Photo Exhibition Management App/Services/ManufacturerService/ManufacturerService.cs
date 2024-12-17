@@ -4,23 +4,28 @@
 	{
 		public List<ManufacturerResponseDto> Manufacturers { get; } = new List<ManufacturerResponseDto>();
 		public List<ManufacturerResponseDto> ManufacturersWithAll { get; } = new List<ManufacturerResponseDto>();
+		public bool IsSearch { get; set; } = false;
 		public async Task GetManufacturers(int categoryId)
 		{
 			Manufacturers.Clear();
+			IsSearch = true;
 			var result = await Api.Get<ServiceResponse<IEnumerable<ManufacturerResponseDto>>>($"api/manufacturer/category/{categoryId}");
 			if (result != null && result.Data != null)
 			{
 				Manufacturers.AddRange(result.Data);
+				IsSearch = false;
 			}
 		}
 		public async Task GetManufacturersWithAll(int categoryId)
 		{
 			ManufacturersWithAll.Clear();
+			IsSearch = true;
 			var result = await Api.Get<ServiceResponse<IEnumerable<ManufacturerResponseDto>>>($"api/manufacturer/category/{categoryId}");
 			if (result != null && result.Data != null)
 			{
 				ManufacturersWithAll.Add(new ManufacturerResponseDto(0, "ALL"));
 				ManufacturersWithAll.AddRange(result.Data);
+				IsSearch = false;
 			}
 		}
 		public async Task<ServiceResponse<bool>> AddManufacturer(ManufacturerRequestDto request)

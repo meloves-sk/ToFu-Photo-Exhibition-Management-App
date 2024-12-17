@@ -126,6 +126,7 @@
 
 		private async Task SetCategories()
 		{
+			StartProgress();
 			await _categoryService.GetCategories();
 			categoryComboBox.ItemsSource = _categoryService.Categories;
 			if (_carResponse == null)
@@ -137,6 +138,7 @@
 				categoryComboBox.SelectedItem = _categoryService.Categories.First(a => a.Name == _carResponse.Category);
 			}
 			categoryComboBox.Items.Refresh();
+			EndProgress();
 		}
 		private async Task SetManufacturers()
 		{
@@ -146,6 +148,7 @@
 				manufacturerComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _manufacturerService.GetManufacturers(category.Id);
 			manufacturerComboBox.ItemsSource = _manufacturerService.Manufacturers;
 			if (_carResponse == null)
@@ -157,6 +160,7 @@
 				manufacturerComboBox.SelectedItem = _manufacturerService.Manufacturers.First(a => a.Name == _carResponse.Manufacturer);
 			}
 			manufacturerComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetTeamInformations()
@@ -168,6 +172,7 @@
 				teamInformationComboBox.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _teamInformationService.GetTeamInformations(category.Id, manufacturer.Id, 0);
 			teamInformationComboBox.ItemsSource = _teamInformationService.TeamInformations;
 			if (_carResponse == null)
@@ -179,6 +184,7 @@
 				teamInformationComboBox.SelectedItem = _teamInformationService.TeamInformations.First(a => a.Team == _carResponse.Team);
 			}
 			teamInformationComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetCars()
@@ -190,9 +196,25 @@
 				dataGrid.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _carService.GetCars(category.Id, manufacturer.Id, 0);
 			dataGrid.ItemsSource = _carService.Cars;
 			dataGrid.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_categoryService.IsSearch || _manufacturerService.IsSearch || _teamInformationService.IsSearch || _carService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

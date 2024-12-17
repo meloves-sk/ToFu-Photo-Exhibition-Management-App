@@ -4,6 +4,7 @@
 	{
 		public List<CategoryResponseDto> Categories { get; }
 		public List<CategoryResponseDto> CategoriesWithAll { get; }
+		public bool IsSearch { get; set; }
 		Task GetCategories();
 		Task GetCategoriesWithAll();
 	}

@@ -4,10 +4,12 @@ namespace ToFu_Photo_Exhibition_Management_App.Services.PhotoService
 	class PhotoService : IPhotoService
 	{
 		public List<PhotoResponseDto> Photos { get; } = new List<PhotoResponseDto>();
+		public bool IsSearch { get; set; } = false;
 
 		public async Task GetPhotos(int categoryId, int roundId, int manufacturerId, int teamId, int carId)
 		{
 			Photos.Clear();
+			IsSearch = true;
 			var result = await Api.Get<ServiceResponse<IEnumerable<PhotoResponseDto>>>($"api/photo/category/{categoryId}/round/{roundId}/manufacturer/{manufacturerId}/team/{teamId}/car/{carId}");
 			if (result != null && result.Data != null)
 			{
@@ -24,6 +26,7 @@ namespace ToFu_Photo_Exhibition_Management_App.Services.PhotoService
 					a.CarNo,
 					a.Team,
 					a.Manufacturer)));
+				IsSearch = false;
 			}
 		}
 		public async Task<ServiceResponse<bool>> AddPhoto(PhotoRequestDto request)

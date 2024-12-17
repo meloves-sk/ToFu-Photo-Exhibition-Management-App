@@ -93,85 +93,6 @@
 			_addEditPhotoFactory.Create().ShowDialog();
 			await SetPhotos();
 		}
-
-		private async Task SetCategories()
-		{
-			await _categoryService.GetCategoriesWithAll();
-			categoryComboBox.ItemsSource = _categoryService.CategoriesWithAll;
-			categoryComboBox.SelectedItem = _categoryService.CategoriesWithAll.FirstOrDefault();
-			categoryComboBox.Items.Refresh();
-		}
-
-		private async Task SetRounds()
-		{
-			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
-			if (category == null)
-			{
-				return;
-			}
-			await _roundService.GetRoundsWithAll(category.Id);
-			roundComboBox.ItemsSource = _roundService.RoundsWithAll;
-			roundComboBox.SelectedItem = _roundService.RoundsWithAll.FirstOrDefault();
-			roundComboBox.Items.Refresh();
-		}
-		private async Task SetManufacturers()
-		{
-			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
-			if (category == null)
-			{
-				return;
-			}
-			await _manufacturerService.GetManufacturersWithAll(category.Id);
-			manufacturerComboBox.ItemsSource = _manufacturerService.ManufacturersWithAll;
-			manufacturerComboBox.SelectedItem = _manufacturerService.ManufacturersWithAll.FirstOrDefault();
-			manufacturerComboBox.Items.Refresh();
-		}
-
-		private async Task SetTeams()
-		{
-			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
-			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
-			if (category == null || manufacturer == null)
-			{
-				return;
-			}
-			await _teamService.GetTeamsWithAll(category.Id, manufacturer.Id);
-			teamComboBox.ItemsSource = _teamService.TeamsWithAll;
-			teamComboBox.SelectedItem = _teamService.TeamsWithAll.FirstOrDefault();
-			teamComboBox.Items.Refresh();
-		}
-
-		private async Task SetCars()
-		{
-			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
-			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
-			var team = teamComboBox.SelectedItem as TeamResponseDto;
-			if (category == null || manufacturer == null || team == null)
-			{
-				return;
-			}
-			await _carService.GetCarsWithAll(category.Id, manufacturer.Id, team.Id);
-			carComboBox.ItemsSource = _carService.CarsWithAll;
-			carComboBox.SelectedItem = _carService.CarsWithAll.FirstOrDefault();
-			carComboBox.Items.Refresh();
-		}
-
-		private async Task SetPhotos()
-		{
-			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
-			var round = roundComboBox.SelectedItem as RoundResponseDto;
-			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
-			var team = teamComboBox.SelectedItem as TeamResponseDto;
-			var car = carComboBox.SelectedItem as CarResponseDto;
-			if (category == null || round == null || manufacturer == null || team == null || car == null)
-			{
-				return;
-			}
-			await _photoService.GetPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
-			listBox.ItemsSource = _photoService.Photos;
-			listBox.Items.Refresh();
-		}
-
 		private async void roundButton_Click(object sender, RoutedEventArgs e)
 		{
 			_roundFactory.Create().ShowDialog();
@@ -200,6 +121,110 @@
 		{
 			_carFactory.Create().ShowDialog();
 			await SetCars();
+		}
+
+		private async Task SetCategories()
+		{
+			StartProgress();
+			await _categoryService.GetCategoriesWithAll();
+			categoryComboBox.ItemsSource = _categoryService.CategoriesWithAll;
+			categoryComboBox.SelectedItem = _categoryService.CategoriesWithAll.FirstOrDefault();
+			categoryComboBox.Items.Refresh();
+			EndProgress();
+		}
+
+		private async Task SetRounds()
+		{
+			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
+			if (category == null)
+			{
+				return;
+			}
+			StartProgress();
+			await _roundService.GetRoundsWithAll(category.Id);
+			roundComboBox.ItemsSource = _roundService.RoundsWithAll;
+			roundComboBox.SelectedItem = _roundService.RoundsWithAll.FirstOrDefault();
+			roundComboBox.Items.Refresh();
+			EndProgress();
+		}
+		private async Task SetManufacturers()
+		{
+			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
+			if (category == null)
+			{
+				return;
+			}
+			StartProgress();
+			await _manufacturerService.GetManufacturersWithAll(category.Id);
+			manufacturerComboBox.ItemsSource = _manufacturerService.ManufacturersWithAll;
+			manufacturerComboBox.SelectedItem = _manufacturerService.ManufacturersWithAll.FirstOrDefault();
+			manufacturerComboBox.Items.Refresh();
+			EndProgress();
+		}
+
+		private async Task SetTeams()
+		{
+			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
+			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
+			if (category == null || manufacturer == null)
+			{
+				return;
+			}
+			StartProgress();
+			await _teamService.GetTeamsWithAll(category.Id, manufacturer.Id);
+			teamComboBox.ItemsSource = _teamService.TeamsWithAll;
+			teamComboBox.SelectedItem = _teamService.TeamsWithAll.FirstOrDefault();
+			teamComboBox.Items.Refresh();
+			EndProgress();
+		}
+
+		private async Task SetCars()
+		{
+			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
+			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
+			var team = teamComboBox.SelectedItem as TeamResponseDto;
+			if (category == null || manufacturer == null || team == null)
+			{
+				return;
+			}
+			StartProgress();
+			await _carService.GetCarsWithAll(category.Id, manufacturer.Id, team.Id);
+			carComboBox.ItemsSource = _carService.CarsWithAll;
+			carComboBox.SelectedItem = _carService.CarsWithAll.FirstOrDefault();
+			carComboBox.Items.Refresh();
+			EndProgress();
+		}
+
+		private async Task SetPhotos()
+		{
+			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
+			var round = roundComboBox.SelectedItem as RoundResponseDto;
+			var manufacturer = manufacturerComboBox.SelectedItem as ManufacturerResponseDto;
+			var team = teamComboBox.SelectedItem as TeamResponseDto;
+			var car = carComboBox.SelectedItem as CarResponseDto;
+			if (category == null || round == null || manufacturer == null || team == null || car == null)
+			{
+				return;
+			}
+			StartProgress();
+			await _photoService.GetPhotos(category.Id, round.Id, manufacturer.Id, team.Id, car.Id);
+			listBox.ItemsSource = _photoService.Photos;
+			listBox.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_categoryService.IsSearch || _roundService.IsSearch || _manufacturerService.IsSearch || _teamService.IsSearch || _carService.IsSearch || _photoService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

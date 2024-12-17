@@ -4,6 +4,7 @@
 	{
 		public List<ManufacturerResponseDto> Manufacturers { get; }
 		public List<ManufacturerResponseDto> ManufacturersWithAll { get; }
+		public bool IsSearch { get; set; }
 		Task GetManufacturers(int categoryId);
 		Task GetManufacturersWithAll(int categoryId);
 		Task<ServiceResponse<bool>> AddManufacturer(ManufacturerRequestDto request);

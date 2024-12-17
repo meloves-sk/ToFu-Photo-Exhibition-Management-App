@@ -4,6 +4,7 @@
 	{
 		public List<TeamResponseDto> Teams { get; }
 		public List<TeamResponseDto> TeamsWithAll { get; }
+		public bool IsSearch { get; set; }
 		Task GetTeams(int categoryId, int manufacturerId);
 		Task GetTeamsWithAll(int categoryId, int manufacturerId);
 		Task<ServiceResponse<bool>> AddTeam(TeamRequestDto request);

@@ -82,12 +82,27 @@
 				statusTextBlock.Text = $"Selected: {_manufacturerResponse.Name}";
 			}
 		}
-
 		private async Task SetManufacturers()
 		{
+			StartProgress();
 			await _manufacturerService.GetManufacturers(0);
 			dataGrid.ItemsSource = _manufacturerService.Manufacturers;
 			dataGrid.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_manufacturerService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

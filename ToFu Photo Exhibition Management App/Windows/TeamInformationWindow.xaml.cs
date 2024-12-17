@@ -115,6 +115,7 @@
 
 		private async Task SetCategories()
 		{
+			StartProgress();
 			await _categoryService.GetCategories();
 			categoryComboBox.ItemsSource = _categoryService.Categories;
 			if (_teamInformationResponse == null)
@@ -126,9 +127,11 @@
 				categoryComboBox.SelectedItem = _categoryService.Categories.First(a => a.Name == _teamInformationResponse.Category);
 			}
 			categoryComboBox.Items.Refresh();
+			EndProgress();
 		}
 		private async Task SetManufacturers()
 		{
+			StartProgress();
 			await _manufacturerService.GetManufacturers(0);
 			manufacturerComboBox.ItemsSource = _manufacturerService.Manufacturers;
 			if (_teamInformationResponse == null)
@@ -140,10 +143,12 @@
 				manufacturerComboBox.SelectedItem = _manufacturerService.Manufacturers.First(a => a.Name == _teamInformationResponse.Manufacturer);
 			}
 			manufacturerComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetTeams()
 		{
+			StartProgress();
 			await _teamService.GetTeams(0, 0);
 			teamComboBox.ItemsSource = _teamService.Teams;
 			if (_teamInformationResponse == null)
@@ -155,6 +160,7 @@
 				teamComboBox.SelectedItem = _teamService.Teams.First(a => a.Name == _teamInformationResponse.Team);
 			}
 			teamComboBox.Items.Refresh();
+			EndProgress();
 		}
 
 		private async Task SetTeamInformations()
@@ -166,9 +172,25 @@
 				dataGrid.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _teamInformationService.GetTeamInformations(category.Id, manufacturer.Id, 0);
 			dataGrid.ItemsSource = _teamInformationService.TeamInformations;
 			dataGrid.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_categoryService.IsSearch || _manufacturerService.IsSearch || _teamService.IsSearch || _teamInformationService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

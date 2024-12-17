@@ -4,6 +4,7 @@
 	{
 		public List<RoundResponseDto> Rounds { get; }
 		public List<RoundResponseDto> RoundsWithAll { get; }
+		public bool IsSearch { get; set; } 
 		Task GetRounds(int categoryId);
 		Task GetRoundsWithAll(int categoryId);
 		Task<ServiceResponse<bool>> AddRound(RoundRequestDto request);

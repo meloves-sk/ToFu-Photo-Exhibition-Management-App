@@ -4,6 +4,7 @@
 	{
 		public List<CarResponseDto> Cars { get; }
 		public List<CarResponseDto> CarsWithAll { get; }
+		public bool IsSearch { get; set; }
 		Task GetCars(int categoryId, int manufacturerId, int teamId);
 		Task GetCarsWithAll(int categoryId, int manufacturerId, int teamId);
 		Task<ServiceResponse<bool>> AddCar(CarRequestDto request);

@@ -4,23 +4,28 @@
 	{
 		public List<RoundResponseDto> Rounds { get; } = new List<RoundResponseDto>();
 		public List<RoundResponseDto> RoundsWithAll { get; } = new List<RoundResponseDto>();
+		public bool IsSearch { get; set; } = false;
 		public async Task GetRounds(int categoryId)
 		{
 			Rounds.Clear();
+			IsSearch = true;
 			var result = await Api.Get<ServiceResponse<IEnumerable<RoundResponseDto>>>($"api/round/category/{categoryId}");
 			if (result != null && result.Data != null)
 			{
 				Rounds.AddRange(result.Data);
+				IsSearch = false;
 			}
 		}
 		public async Task GetRoundsWithAll(int categoryId)
 		{
 			RoundsWithAll.Clear();
+			IsSearch = true;
 			var result = await Api.Get<ServiceResponse<IEnumerable<RoundResponseDto>>>($"api/round/category/{categoryId}");
 			if (result != null && result.Data != null)
 			{
 				RoundsWithAll.Add(new RoundResponseDto(0, "ALL"));
 				RoundsWithAll.AddRange(result.Data);
+				IsSearch = false;
 			}
 		}
 		public async Task<ServiceResponse<bool>> AddRound(RoundRequestDto request)

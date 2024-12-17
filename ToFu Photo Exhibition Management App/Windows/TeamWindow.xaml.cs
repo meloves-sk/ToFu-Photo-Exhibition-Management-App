@@ -85,9 +85,25 @@
 		}
 		private async Task SetTeams()
 		{
+			StartProgress();
 			await _teamService.GetTeams(0, 0);
 			dataGrid.ItemsSource = _teamService.Teams;
 			dataGrid.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_teamService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

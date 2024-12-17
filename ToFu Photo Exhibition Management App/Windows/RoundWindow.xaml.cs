@@ -19,10 +19,7 @@
 
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			await _categoryService.GetCategories();
-			categoryComboBox.ItemsSource = _categoryService.Categories;
-			categoryComboBox.SelectedItem = _categoryService.Categories.FirstOrDefault();
-			SetStatus();
+			await SetCategories();
 		}
 
 		private async void saveButton_Click(object sender, RoutedEventArgs e)
@@ -97,7 +94,15 @@
 				statusTextBlock.Text = $"Selected: {_roundResponse.Name}";
 			}
 		}
-
+		private async Task SetCategories()
+		{
+			StartProgress();
+			await _categoryService.GetCategories();
+			categoryComboBox.ItemsSource = _categoryService.Categories;
+			categoryComboBox.SelectedItem = _categoryService.Categories.FirstOrDefault();
+			SetStatus();
+			EndProgress();
+		}
 		private async Task SetRounds()
 		{
 			var category = categoryComboBox.SelectedItem as CategoryResponseDto;
@@ -106,9 +111,25 @@
 				dataGrid.ItemsSource = null;
 				return;
 			}
+			StartProgress();
 			await _roundService.GetRounds(category.Id);
 			dataGrid.ItemsSource = _roundService.Rounds;
 			dataGrid.Items.Refresh();
+			EndProgress();
+		}
+		private void StartProgress()
+		{
+			mainGrid.Visibility = Visibility.Collapsed;
+			progressGrid.Visibility = Visibility.Visible;
+		}
+		private void EndProgress()
+		{
+			if (_categoryService.IsSearch || _roundService.IsSearch)
+			{
+				return;
+			}
+			mainGrid.Visibility = Visibility.Visible;
+			progressGrid.Visibility = Visibility.Collapsed;
 		}
 	}
 }

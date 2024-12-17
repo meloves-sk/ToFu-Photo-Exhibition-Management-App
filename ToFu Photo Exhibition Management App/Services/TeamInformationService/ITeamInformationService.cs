@@ -3,6 +3,7 @@
 	public interface ITeamInformationService
 	{
 		public List<TeamInformationResponseDto> TeamInformations { get; }
+		public bool IsSearch { get; set; }
 		Task GetTeamInformations(int categoryId, int manufacturerId, int teamId);
 		Task<ServiceResponse<bool>> AddTeamInformation(TeamInformationRequestDto request);
 		Task<ServiceResponse<bool>> UpdateTeamInformation(TeamInformationRequestDto request);
