@@ -2,9 +2,9 @@
 {
 	public interface ICategoryService
 	{
-		public List<CategoryResponseDto> Categories { get; }
-		public List<CategoryResponseDto> CategoriesWithAll { get; }
-		public bool IsSearch { get; set; }
+		List<CategoryResponseDto> Categories { get; }
+		List<CategoryResponseDto> CategoriesWithAll { get; }
+		bool IsSearch { get; set; }
 		Task GetCategories();
 		Task GetCategoriesWithAll();
 	}
