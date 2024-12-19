@@ -2,14 +2,19 @@
 {
 	class CategoryService : ICategoryService
 	{
+		private readonly IApiService _apiService;
 		public List<CategoryResponseDto> Categories { get; } = new List<CategoryResponseDto>();
 		public List<CategoryResponseDto> CategoriesWithAll { get; } = new List<CategoryResponseDto>();
 		public bool IsSearch { get; set; } = false;
+		public CategoryService(IApiService apiService)
+		{
+			_apiService = apiService;
+		}
 		public async Task GetCategories()
 		{
 			Categories.Clear();
 			IsSearch = true;
-			var result = await Api.Get<ServiceResponse<IEnumerable<CategoryResponseDto>>>("api/category");
+			var result = await _apiService.Get<ServiceResponse<IEnumerable<CategoryResponseDto>>>("api/category");
 			if (result != null && result.Data != null)
 			{
 				Categories.AddRange(result.Data);
@@ -21,7 +26,7 @@
 		{
 			CategoriesWithAll.Clear();
 			IsSearch = true;
-			var result = await Api.Get<ServiceResponse<IEnumerable<CategoryResponseDto>>>("api/category");
+			var result = await _apiService.Get<ServiceResponse<IEnumerable<CategoryResponseDto>>>("api/category");
 			if (result != null && result.Data != null)
 			{
 				CategoriesWithAll.Add(new CategoryResponseDto(0, "ALL"));

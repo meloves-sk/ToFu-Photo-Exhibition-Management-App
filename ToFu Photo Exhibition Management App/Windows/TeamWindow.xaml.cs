@@ -93,8 +93,8 @@
 		}
 		private void StartProgress()
 		{
-			mainGrid.Visibility = Visibility.Collapsed;
-			progressGrid.Visibility = Visibility.Visible;
+			dataGrid.Visibility = Visibility.Collapsed;
+			progressPanel.Visibility = Visibility.Visible;
 		}
 		private void EndProgress()
 		{
@@ -102,8 +102,8 @@
 			{
 				return;
 			}
-			mainGrid.Visibility = Visibility.Visible;
-			progressGrid.Visibility = Visibility.Collapsed;
+			dataGrid.Visibility = Visibility.Visible;
+			progressPanel.Visibility = Visibility.Collapsed;
 		}
 	}
 }

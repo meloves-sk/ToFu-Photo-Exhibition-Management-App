@@ -35,11 +35,11 @@
 		}
 		private async void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			await SetCategories();
 			if (_addEditPhotoFactory.Argument == null)
 			{
 				_isInitialize = false;
 			}
+			await SetCategories();
 			if (_isInitialize)
 			{
 				Title = "Edit Photo";

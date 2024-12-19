@@ -15,6 +15,7 @@ global using ToFu_Photo_Exhibition_Management_App.Services.TeamInformationServic
 global using ToFu_Photo_Exhibition_Management_App.Dto.Response;
 global using ToFu_Photo_Exhibition_Management_App.StartupHelpers;
 global using ToFu_Photo_Exhibition_Management_App.Shared.Dto.Request;
+global using ToFu_Photo_Exhibition_Management_App.Services.ApiService;
 global using Microsoft.Win32;
 global using System.IO;
 global using System.Windows.Documents;
@@ -45,6 +46,8 @@ namespace ToFu_Photo_Exhibition_Management_App
 				services.AddTransient<ITeamInformationService, TeamInformationService>();
 				services.AddTransient<ICarService, CarService>();
 				services.AddTransient<IPhotoService, PhotoService>();
+				services.AddTransient<IApiService,ApiService>();
+				services.AddTransient(a => new HttpClient());
 			}).Build();
 		}
 		protected override async void OnStartup(StartupEventArgs e)

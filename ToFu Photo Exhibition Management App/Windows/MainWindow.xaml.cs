@@ -1,4 +1,6 @@
-﻿namespace ToFu_Photo_Exhibition_Management_App.Windows
+﻿using System.Windows.Controls;
+
+namespace ToFu_Photo_Exhibition_Management_App.Windows
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
@@ -214,8 +216,8 @@
 		}
 		private void StartProgress()
 		{
-			mainGrid.Visibility = Visibility.Collapsed;
-			progressGrid.Visibility = Visibility.Visible;
+			listBox.Visibility = Visibility.Collapsed;
+			progressPanel.Visibility = Visibility.Visible;
 		}
 		private void EndProgress()
 		{
@@ -223,8 +225,8 @@
 			{
 				return;
 			}
-			mainGrid.Visibility = Visibility.Visible;
-			progressGrid.Visibility = Visibility.Collapsed;
+			listBox.Visibility = Visibility.Visible;
+			progressPanel.Visibility = Visibility.Collapsed;
 		}
 	}
 }

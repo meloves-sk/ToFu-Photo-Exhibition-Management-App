@@ -64,10 +64,7 @@
 				var result = _carResponse == null ?
 					await _carService.AddCar(request) :
 					await _carService.UpdateCar(request);
-				carTextBox.Text = string.Empty;
-				carNoTextBox.Text = string.Empty;
-				_carResponse = null;
-				SetStatus();
+				SetDefault();
 				await SetCars();
 				MessageBox.Show(result.Message);
 			}
@@ -79,10 +76,7 @@
 
 		private void resetLink_Click(object sender, RoutedEventArgs e)
 		{
-			carTextBox.Text = string.Empty;
-			carNoTextBox.Text = string.Empty;
-			_carResponse = null;
-			SetStatus();
+			SetDefault();
 		}
 
 		private async void editLink_Click(object sender, RoutedEventArgs e)
@@ -96,6 +90,9 @@
 			carTextBox.Text = _carResponse.Name;
 			carNoTextBox.Text = _carResponse.CarNo.ToString();
 			await SetTeamInformations();
+			categoryComboBox.IsEnabled = false;
+			manufacturerComboBox.IsEnabled = false;
+			teamInformationComboBox.IsEnabled = false;
 			SetStatus();
 		}
 
@@ -106,10 +103,19 @@
 			{
 				return;
 			}
-			_carResponse = car;
-			carTextBox.Text = _carResponse.Name;
-			carNoTextBox.Text = _carResponse.CarNo.ToString();
+			var result = await _teamInformationService.DeleteTeamInformation(car.Id);
 			await SetTeamInformations();
+			SetStatus();
+			MessageBox.Show(result.Message);
+		}
+		private void SetDefault()
+		{
+			carTextBox.Text = string.Empty;
+			carNoTextBox.Text = string.Empty;
+			_carResponse = null;
+			categoryComboBox.IsEnabled = true;
+			manufacturerComboBox.IsEnabled = true;
+			teamInformationComboBox.IsEnabled = true;
 			SetStatus();
 		}
 		private void SetStatus()
@@ -204,8 +210,8 @@
 		}
 		private void StartProgress()
 		{
-			mainGrid.Visibility = Visibility.Collapsed;
-			progressGrid.Visibility = Visibility.Visible;
+			dataGrid.Visibility = Visibility.Collapsed;
+			progressPanel.Visibility = Visibility.Visible;
 		}
 		private void EndProgress()
 		{
@@ -213,8 +219,8 @@
 			{
 				return;
 			}
-			mainGrid.Visibility = Visibility.Visible;
-			progressGrid.Visibility = Visibility.Collapsed;
+			dataGrid.Visibility = Visibility.Visible;
+			progressPanel.Visibility = Visibility.Collapsed;
 		}
 	}
 }
