@@ -63,11 +63,11 @@
 				ofd.Filter = "写真|*.jpg;*.jpeg;*.png";
 				if (ofd.ShowDialog() == true)
 				{
-					var info = new FileInfo(ofd.FileName);
-					if (info.Length > 10485760)
-					{
-						throw new Exception("アップロード可能な写真は10MB以下です");
-					}
+					//var info = new FileInfo(ofd.FileName);
+					//if (info.Length > 10485760)
+					//{
+					//	throw new Exception("アップロード可能な写真は10MB以下です");
+					//}
 					_imageData = File.ReadAllBytes(ofd.FileName);
 					SetImage();
 				}
