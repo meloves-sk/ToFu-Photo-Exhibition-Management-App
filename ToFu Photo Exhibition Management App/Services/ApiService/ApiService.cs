@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-
 namespace ToFu_Photo_Exhibition_Management_App.Services.ApiService
 {
 	public class ApiService : IApiService

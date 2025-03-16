@@ -21,7 +21,7 @@ namespace ToFu_Photo_Exhibition_Management_App.Services.PhotoService
 				Photos.AddRange(result.Data.Select(a =>
 				new PhotoResponseDto(
 					a.Id,
-					$"https://www.meloves.net/tofu-photo-exhibition/{a.FilePath}",
+					$"https://meloves.sytes.net/tofu-photo-exhibition/{a.FilePath}",
 					a.Description,
 					a.RoundId,
 					a.CarId,
